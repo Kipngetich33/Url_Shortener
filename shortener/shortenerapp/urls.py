@@ -4,5 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns=[
-    url(r'^$',views.home,name = 'home'),            
+    url(r'^$',views.home,name = 'home'), 
+    url(r'^statistics/',views.statistics, name = 'statistics'),
+    url(r'^makeshort/(?P<shortcode>[-_\w.]+)',views.makeshort, name = 'makeshort' ),           
 ]

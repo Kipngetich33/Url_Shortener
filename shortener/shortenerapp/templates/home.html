@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+{% load bootstrap3 %}
+{% load staticfiles%}
+
+
+{% block styles %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/all_pics.css' %}">
+{% endblock %}
+
+{% block content %}
+{{block.super}}
+<div class="col-md-2"></div>
+<div class="col-md-8">
+    <input type="text" name="url" id="url" class="form-control input-sm" style="width:50%;">
+    <button id="submitButton" class="btn btn-primary">Submit</button>
+</div>
+
+short code {{shortcode}}
+<div class="col-md-2"></div>
+
+{% endblock %} 
