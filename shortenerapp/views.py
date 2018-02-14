@@ -1,10 +1,10 @@
 from django.shortcuts import render,redirect
-from . models import code_generator, Urls
+from . models import Urls
 from . forms import UrlForm
 from django.http import HttpResponse, HttpResponseRedirect
 
 def h(request):
-    shortcode = code_generator(6,'1234567890afuhufxrkerwcklbvds')
+    shortcode = Urls.code_generator()
     return render(request,'home.html',{"shortcode":shortcode})
 
 def r(request):
@@ -13,9 +13,9 @@ def r(request):
         prefix = 'http//:r/'
         httpurl = prefix
 
-        count = Urls.objects.filter(httpurl = search_name).count()
+        count = Urls.count_unique(search_name)
         if count <= 0:
-            shortcode = code_generator(6,'1234567890afuhufxrkerwcklbvds')
+            shortcode = Urls.code_generator()
             new_url = Urls (short_id = shortcode,httpurl = search_name )
             new_url.save()
             httpurl = search_name 
