@@ -5,6 +5,6 @@ from django.conf.urls.static import static
 
 urlpatterns=[
     url(r'^$',views.h,name = 'home'), 
-    url(r'^s/',views.s, name = 'statistics'),
-    url(r'^r/',views.r, name = 'makeshort'),           
+    url(r'^s/(?P<httpurl>[-_\w.]+)',views.s, name = 'statistics'),
+    url(r'^r/',views.r, name = 'makeshort'),       
 ]
