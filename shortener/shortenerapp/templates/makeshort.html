@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-short_url : {{short_url}}
-message: {{message}}
-<a href="#">Redirecting to {{httpurl}}</a>
+short_url : {{shortcode}}<br>
+message: {{message}}<br>
+actual url : {{httpurl}}<br>
+<a href="{% url 'statistics' httpurl %}">Redirecting to {{httpurl}}</a><br>
 {% endblock %}
