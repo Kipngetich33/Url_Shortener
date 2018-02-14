@@ -3,5 +3,5 @@
 short_url : {{shortcode}}<br>
 message: {{message}}<br>
 actual url : {{httpurl}}<br>
-<a href="{% url 'statistics' httpurl %}">Redirecting to {{httpurl}}</a><br>
+<a href="{% url 'statistics' shortcode %}">Redirecting to {{httpurl}}</a><br>
 {% endblock %}

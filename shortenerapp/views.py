@@ -27,18 +27,20 @@ def r(request):
     else:
         shortcode ='You cannot create a shortcode with an empty input'
         message = 'You have not entered any url'
-        httpurl = ''
+        httpurl = 'empty'
 
     return render(request,'makeshort.html',{"message":message,"shortcode":shortcode, "httpurl":httpurl})
 
 def s(request, shortcode): 
     count = Urls.objects.filter(short_id = shortcode).count()
-
-    if count > 0: 
-        httpurl = Urls.objects.get(short_id = shortcode)
-        return redirect(httpurl.httpurl)
-    else:
-        return redirect(l)
+    try:
+        if count > 0: 
+            httpurl = Urls.objects.get(short_id = shortcode)
+            return redirect(httpurl.httpurl)
+        else:
+            return redirect(l)
+    except:
+        return redirect(w)
 
 def l(request):
     message = ''
@@ -47,3 +49,6 @@ def l(request):
 def a(request):
     urls = Urls.objects.all()
     return render(request,'all.html',{"urls":urls})
+
+def w(request):
+    return render(request,'wrong.html')

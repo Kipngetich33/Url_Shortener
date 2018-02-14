@@ -8,5 +8,6 @@ urlpatterns=[
     url(r'^s/(?P<shortcode>[-_\w.]+)',views.s, name = 'statistics'),
     url(r'^r/',views.r, name = 'makeshort'),
     url(r'^l/',views.l, name = 'last'),
-    url(r'^a',views.a, name = 'all'),   
+    url(r'^a',views.a, name = 'all'), 
+    url(r'^w',views.w, name = 'wrong'), 
 ]
