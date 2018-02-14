@@ -39,7 +39,11 @@ def s(request, shortcode):
         return redirect(httpurl.httpurl)
     else:
         return redirect(l)
-        
+
 def l(request):
     message = ''
     return render(request, 'last.html',{"message":message})
+
+def a(request):
+    urls = Urls.objects.all()
+    return render(request,'all.html',{"urls":urls})
