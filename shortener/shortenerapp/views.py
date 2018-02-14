@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from . models import code_generator, Urls
 from . forms import UrlForm
+from django.http import HttpResponse, HttpResponseRedirect
 
 def h(request):
     shortcode = code_generator(6,'1234567890afuhufxrkerwcklbvds')
@@ -30,6 +31,15 @@ def r(request):
 
     return render(request,'makeshort.html',{"message":message,"shortcode":shortcode, "httpurl":httpurl})
 
-def s(request, httpurl): 
-    httpurl = httpurl
-    return redirect(f'{{httpurl}}')
+def s(request, shortcode): 
+    count = Urls.objects.filter(short_id = shortcode).count()
+
+    if count > 0: 
+        httpurl = Urls.objects.get(short_id = shortcode)
+        return redirect(httpurl.httpurl)
+    else:
+        return redirect(l)
+        
+def l(request):
+    message = ''
+    return render(request, 'last.html',{"message":message})
