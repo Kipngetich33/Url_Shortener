@@ -1,9 +1,10 @@
 from django.shortcuts import render,redirect
-from . models import Urls
+from . models import Urls, Statistics
 from . forms import UrlForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
+from . statistics import calculate_popularity
 
 def h(request):
     if request.method == 'POST':
@@ -35,13 +36,16 @@ def r(request):
     shortcode = Urls.objects.get(httpurl = search_name).short_id
     return render(request,'makeshort.html',{"message":message,"shortcode":shortcode, "httpurl":httpurl})
 
-def s(request, shortcode): 
+def s(request, shortcode):
     try:
         is_shortcode = Urls.shortcode_exist(shortcode)
         if is_shortcode == True:
             requested_url = Urls.get_url_by_shorcode(shortcode)
             requested_url.count +=1
             requested_url.save()
+            increase_total = Statistics.objects.get(name = 'statistics')
+            increase_total.total_clicks += 1
+            increase_total.save()
             return redirect(requested_url.httpurl)
         else:
             return redirect(l)
@@ -53,8 +57,10 @@ def l(request):
     return render(request, 'last.html',{"message":message})
 
 def a(request):
+    index = calculate_popularity(2,1) 
     urls = Urls.objects.all()
-    return render(request,'all.html',{"urls":urls})
+    total_clicks = Statistics.get_total_clicks()
+    return render(request,'all.html',{"urls":urls,"total_clicks":total_clicks,"index":index})
 
 def w(request):
     return render(request,'wrong.html')

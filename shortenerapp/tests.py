@@ -1,5 +1,5 @@
 from django.test import TestCase
-from . models import Urls
+from . models import Urls, Statistics
 
 class UrlsTestClass(TestCase):
     '''
@@ -66,6 +66,14 @@ class UrlsTestClass(TestCase):
         url = Urls.get_url_by_shorcode('hrhje')
         self.assertTrue(url.short_id == 'hrhje' )
 
+    def test_get_shortcode_by_url(self):
+        '''
+        Tests the get_shortcode_by_url method of the Urls class
+        '''
+        self.url.save()
+        requested_url = Urls.get_shortcode_by_url('http://google.com')
+        self.assertTrue(requested_url.short_id == 'hrhje')
+
 class OtherFunctionsTestClass(TestCase):
     '''
     Test class that test the characteristics of other methods and 
@@ -79,6 +87,47 @@ class OtherFunctionsTestClass(TestCase):
         self.url = Urls(short_id = 'hrhje', httpurl ='http://google.com')
 
     def test_Url_Validator(self):
+        pass
+
+class StatisticsTestClass(TestCase):
+    '''
+    Tests the characteristics of the statistics class
+    '''
+    def setUp(self):
+        '''
+        Method that runs at the begining of each test
+        '''
+        self.statistic = Statistics(name='statistics')
+
+    def test_isinstance(self):
+        '''
+        Method that test if an object is an instance of a given Class
+        '''
+        self.assertTrue(isinstance(self.statistic,Statistics))
+
+    def test_get_total_clicks(self):
+        '''
+        Method that test get_total_clicks method
+        '''
+        self.statistic.save()
+        self.statistic.total_clicks +=1
+        self.statistic.save()
+        self.assertTrue(Statistics.get_total_clicks() == 1)
+
+    def test_calculate_popularity(self):
+        '''
+        Method that test the calculate_popularity method
+        '''
+        self.statistic.save()
+        self.statistic.total_clicks +=2
+        calculated_index = Statistics.calculate_popularity(1)
+        self.statistic.save()
+        self.assertTrue(calculated_index == 2)
+
+
+
+
+    
 
 
 

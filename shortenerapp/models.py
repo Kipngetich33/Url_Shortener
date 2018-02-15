@@ -2,6 +2,7 @@ from django.db import models
 import random
 
 
+
 # Create your models here.
 class Urls(models.Model):
     short_id = models.SlugField(max_length=6,primary_key=True)
@@ -69,6 +70,40 @@ class Urls(models.Model):
         '''
         url = cls.objects.get(short_id= short_id)
         return url
+
+    
+    class Meta:
+        '''
+        Order urls based on the number of clicks
+        '''
+        ordering = ['-count']
+
+    @classmethod
+    def get_shortcode_by_url(cls,httpurl):
+        '''
+        Method that returns the url object based on the provided httpurl
+        '''
+        requested_url = cls.objects.get(httpurl = httpurl)
+        return requested_url
+
+class Statistics(models.Model):
+    '''
+    Class that defines the structure of the statistics objects
+    '''
+    name =  models.CharField(max_length = 30, default ='statistics')
+    total_clicks = models.PositiveIntegerField(default=0)
+
+    @classmethod
+    def get_total_clicks(cls):
+        total = cls.objects.get(name = 'statistics')
+        return total.total_clicks
+
+    def calculate_popularity(url_clicks):
+        '''
+        Method that calculates the popularity of a particular based on the number of clicks and 
+        total number of clicks on the app
+        '''
+        pass
 
 
     
