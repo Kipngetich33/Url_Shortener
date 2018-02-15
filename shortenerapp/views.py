@@ -13,8 +13,8 @@ def r(request):
         prefix = 'http//:r/'
         httpurl = prefix
 
-        count = Urls.count_unique(search_name)
-        if count <= 0:
+        is_exist = Urls.url_exist(search_name)
+        if is_exist == False:
             shortcode = Urls.code_generator()
             new_url = Urls (short_id = shortcode,httpurl = search_name )
             new_url.save()

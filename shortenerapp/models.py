@@ -42,7 +42,7 @@ class Urls(models.Model):
         '''
         Method that determines whether a provided httpurl exists in the database
         '''
-        is_exitent = cls.objects.filter(httpurl = 'http://google.com').count()
+        is_exitent = cls.objects.filter(httpurl = httpurl).count()
         if is_exitent > 0:
             return True
         else:
