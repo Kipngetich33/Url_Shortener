@@ -10,4 +10,6 @@ urlpatterns=[
     url(r'^l/',views.l, name = 'last'),
     url(r'^a',views.a, name = 'all'), 
     url(r'^w',views.w, name = 'wrong'), 
+    url(r'^t',views.t, name = 'test'),
+    url(r'^t2',views.t2, name = 'test2'), 
 ]

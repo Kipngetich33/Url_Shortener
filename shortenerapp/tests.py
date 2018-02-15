@@ -66,6 +66,22 @@ class UrlsTestClass(TestCase):
         url = Urls.get_url_by_shorcode('hrhje')
         self.assertTrue(url.short_id == 'hrhje' )
 
+class OtherFunctionsTestClass(TestCase):
+    '''
+    Test class that test the characteristics of other methods and 
+    functionalities of the app
+    '''
+    
+    def setUp(self):
+        '''
+        Method that runs at the beggining of each test
+        '''
+        self.url = Urls(short_id = 'hrhje', httpurl ='http://google.com')
+
+    def test_Url_Validator(self):
+
+
+
 
         
 

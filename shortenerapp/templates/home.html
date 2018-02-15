@@ -13,15 +13,11 @@
 <div class="col-md-2"></div>
 <div class="col-md-8">
     <!-- Adding a search form  -->
-    <form role="search" action="{% url 'makeshort' %}">
-
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Enter URL" name="name">
-            <div class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-send" ></i></button>
-            </div>
-        </div>
-
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %} {% bootstrap_form form%}
+        <input type="submit" class="btn btn-primary btn-sm" value="Submit">
+        <input type="hidden" name="next" value="{{next}}">
+    
     </form>
     <!-- search form end -->
 </div>
