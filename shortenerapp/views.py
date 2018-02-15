@@ -18,38 +18,20 @@ def h(request):
                 new_url = Urls (short_id = shortcode,httpurl = search_name )
                 new_url.save()
                 httpurl = search_name 
+                requested_object = Urls.objects.get(httpurl = search_name)
                 message = 'short code created successfully'
             else:
                 shortcode = Urls.objects.get(httpurl = search_name).short_id
                 httpurl = Urls.objects.get(httpurl = search_name).httpurl
+                requested_object = Urls.objects.get(httpurl = search_name)
                 message = 'A short url for the entered url already exists'
-            return render(request,'makeshort.html',{"message":message,"shortcode":shortcode, "httpurl":httpurl})
+            return render(request,'makeshort.html',{"message":message,"shortcode":shortcode, "httpurl":httpurl,"requested_object":requested_object})
     else:
         form = UrlForm()
     return render(request,'home.html',{"form":form})
 
-
-def r(request):
-    if search_name:
-        prefix = 'http//:r/'
-        httpurl = prefix
-
-        is_exist = Urls.url_exist(search_name)
-        if is_exist == False:
-            shortcode = Urls.code_generator()
-            new_url = Urls (short_id = shortcode,httpurl = search_name )
-            new_url.save()
-            httpurl = search_name 
-            message = 'short code created successfully'
-        else:
-            shortcode = Urls.objects.get(httpurl = search_name).short_id
-            httpurl = Urls.objects.get(httpurl = search_name).httpurl
-            message = 'A short url for the entered url already exists'
-    else:
-        shortcode ='You cannot create a shortcode with an empty input'
-        message = 'You have not entered any url'
-        httpurl = 'empty'
-
+def r(request):    
+    shortcode = Urls.objects.get(httpurl = search_name).short_id
     return render(request,'makeshort.html',{"message":message,"shortcode":shortcode, "httpurl":httpurl})
 
 def s(request, shortcode): 
@@ -57,6 +39,8 @@ def s(request, shortcode):
         is_shortcode = Urls.shortcode_exist(shortcode)
         if is_shortcode == True:
             requested_url = Urls.get_url_by_shorcode(shortcode)
+            requested_url.count +=1
+            requested_url.save()
             return redirect(requested_url.httpurl)
         else:
             return redirect(l)
