@@ -1,4 +1,4 @@
-#!/home/vincent/django/shortener/virtual/bin/python
+#!/home/vincent/django/shortener/virtual/bin/python3.6
 
 # -*- coding: utf-8 -*-
 import re
