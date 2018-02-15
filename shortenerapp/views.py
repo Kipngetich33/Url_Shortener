@@ -32,11 +32,11 @@ def r(request):
     return render(request,'makeshort.html',{"message":message,"shortcode":shortcode, "httpurl":httpurl})
 
 def s(request, shortcode): 
-    count = Urls.objects.filter(short_id = shortcode).count()
     try:
-        if count > 0: 
-            httpurl = Urls.objects.get(short_id = shortcode)
-            return redirect(httpurl.httpurl)
+        is_shortcode = Urls.shortcode_exist(shortcode)
+        if is_shortcode == True:
+            requested_url = Urls.get_url_by_shorcode(shortcode)
+            return redirect(requested_url.httpurl)
         else:
             return redirect(l)
     except:

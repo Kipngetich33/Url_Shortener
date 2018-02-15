@@ -61,6 +61,14 @@ class Urls(models.Model):
             cls.code_generator()
         else:
             return new_code
+    
+    @classmethod
+    def get_url_by_shorcode(cls,short_id):
+        '''
+        Method that fetches a url object attached to the provided short_id
+        '''
+        url = cls.objects.get(short_id= short_id)
+        return url
 
 
     

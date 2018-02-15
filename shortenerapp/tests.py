@@ -58,6 +58,14 @@ class UrlsTestClass(TestCase):
         is_exitent = self.url.shortcode_exist('hrhje')
         self.assertEqual(is_exitent,True) 
 
+    def test_get_url_by_shorcode(self):
+        '''
+        Tests the get_url_by shortcode method of the class Urls
+        '''
+        self.url.save()
+        url = Urls.get_url_by_shorcode('hrhje')
+        self.assertTrue(url.short_id == 'hrhje' )
+
 
         
 
