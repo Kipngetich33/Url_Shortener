@@ -26,15 +26,6 @@ class Urls(models.Model):
         all = cls.objects.filter(httpurl = httpurl).count()
         return all
 
-    def code_generator(self,size = 6 , char = '1234567890afuhufxrkerwcklbvds' ):
-        '''
-        Method that creates a unique shortcode for each given httpurl
-        '''
-        new_code = ''
-        for i in range(size):
-            new_code += random.choice(char)
-        return new_code
-
     @classmethod
     def shortcode_exist(cls,short_id):
         '''
@@ -51,11 +42,25 @@ class Urls(models.Model):
         '''
         Method that determines whether a provided httpurl exists in the database
         '''
-        is_exitent = cls.objects.filter(httpturl = 'http://google.com').count()
+        is_exitent = cls.objects.filter(httpurl = 'http://google.com').count()
         if is_exitent > 0:
             return True
         else:
             return False
+
+    @classmethod
+    def code_generator(cls,size = 6 , char = '1234567890afuhufxrkerwcklbvds' ):
+        '''
+        Method that creates a unique shortcode for each given httpurl
+        '''
+        new_code = ''
+        for i in range(size):
+            new_code += random.choice(char)
+        is_exitent = cls.shortcode_exist(new_code)
+        if is_exitent == True:
+            cls.code_generator()
+        else:
+            return new_code
 
 
     
