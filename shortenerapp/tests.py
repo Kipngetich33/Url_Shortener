@@ -38,9 +38,26 @@ class UrlsTestClass(TestCase):
         Test the code generator method of the Urls class
         '''
         self.url.save()
-        shortcode = Urls.code_generator() 
+        shortcode = self.code_generator()
         self.assertTrue(len(shortcode) == 6)
 
-    def test_is_unique(test):
+    def test_shortcode_exist(self):
         '''
-        Test the is unique
+        Test the is is unique method of the Urls class
+        '''
+        self.url.save()
+        is_exitent = Urls.shortcode_exist('hrhje')
+        self.assertTrue(is_exitent == True)
+
+    def test_url_exist(self):
+        '''
+        Method that tests url_exist method
+        '''
+        self.url.save()
+        is_exitent = Urls.url_exist('http://google.com')
+        self.assertTrue(is_exitent == True)
+
+
+        
+
+    
