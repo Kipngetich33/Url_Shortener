@@ -2,14 +2,13 @@
 {% block content %}
 
 <div class="col-md-3"></div>
-{{index}}
 <div class="col-md-6">
     {% for url in urls %}
     <div class="panel" style="background-color:#d9d9d9; padding:10px;">
         <h4>Actual Url:</h4>&nbsp;&nbsp;<a href="{% url 'statistics' url.short_id %}">{{url.httpurl}}</a>
         <h4>Short Id:</h4>&nbsp;&nbsp;{{url.short_id}}
         <h4>No. Of Click:&nbsp;&nbsp;</h4>{{url.count}} 
-        <h4>Popularity Index</h4>{{url.count}} &nbsp;/&nbsp; {{total_clicks}}
+        <h4>Popularity Index</h4>{{url.index}} &nbsp;%
         
     </div>
     {% endfor %}

@@ -60,6 +60,11 @@ def a(request):
     index = calculate_popularity(2,1) 
     urls = Urls.objects.all()
     total_clicks = Statistics.get_total_clicks()
+
+    for url in urls:
+        index = calculate_popularity(total_clicks,url.count)
+        url.index = index
+        url.save()
     return render(request,'all.html',{"urls":urls,"total_clicks":total_clicks,"index":index})
 
 def w(request):
@@ -83,5 +88,6 @@ def t(request):
         form = UrlForm()
     return render(request,'test.html',{"form":form})
 
-def t2(request):
-    return render(request,'test2.html',{"message":message})
+def p(request):
+    length = 50
+    return render(request,'p.html',{"length": length})

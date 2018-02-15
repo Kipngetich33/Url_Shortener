@@ -9,6 +9,7 @@ class Urls(models.Model):
     httpurl = models.URLField(max_length=200, null = True)
     pub_date = models.DateTimeField(auto_now=True)
     count = models.PositiveIntegerField(default=0)
+    index = models.IntegerField(default=0,null = True)
  
     def __str__(self):
         return self.httpurl
