@@ -5,24 +5,31 @@
 
 {% block styles %}
     {% bootstrap_css %}
-    <link rel="stylesheet" href="{% static 'css/all_pics.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Libre+Baskerville|Lobster" rel="stylesheet">
 {% endblock %}
-
 {% block content %}
 {{block.super}}
-<div class="col-md-2"></div>
-<div class="col-md-8">
-    <!-- Adding a search form  -->
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %} {% bootstrap_form form%}
-        <input type="submit" class="btn btn-primary btn-sm" value="Submit">
-        <input type="hidden" name="next" value="{{next}}">
-    
-    </form>
-    <!-- search form end -->
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+            <div style="text-align:center; margin-top:20%;">
+                    <p style="margin:10px; font-family: 'Libre Baskerville', serif; font-weight:bolder; font-size:27px; color:#400080;" >Make your urls shorter and monitor the number of clicks it gets ,it simpler than you think. Enter your url below !  </p>
+            </div>
+           
+    </div>
+    <div class="col-md-3"></div>
+
 </div>
-<br><br><br>
-<p>Short description of what the site does</p>
-<div class="col-md-2"></div>
+<div class="row" style= "background-color:#d9d9d9; height:100vh;" >
+    <div class="col-md-3"></div>
+    <div class="col-md-6" style="margin:10px;">
+        <form method="post" enctype="multipart/form-data" style="margin-top:3%; width:100%;">
+            {% csrf_token %} {% bootstrap_form form%}
+            <input type="submit" class="btn btn-primary btn-sm" value="Lets Go!" style="width:25%; margin-left: 35%; font-family: 'Lobster', cursive; font-size:20px;"  >
+            <input type="hidden" name="next" value="{{next}}">
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
 
 {% endblock %} 

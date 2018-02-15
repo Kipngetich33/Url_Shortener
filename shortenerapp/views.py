@@ -11,7 +11,7 @@ def h(request):
         form = UrlForm(request.POST)
 
         if form.is_valid():
-            search_name = form.cleaned_data['entered_url']
+            search_name = form.cleaned_data['Enter_url']
             is_exist = Urls.url_exist(search_name)
             if is_exist == False:
                 shortcode = Urls.code_generator()
@@ -22,7 +22,8 @@ def h(request):
                 message = 'short code created successfully'
             else:
                 shortcode = Urls.objects.get(httpurl = search_name).short_id
-                httpurl = Urls.objects.get(httpurl = search_name).httpurl
+                httpurl1 = Urls.objects.get(httpurl = search_name).httpurl
+                httpurl = httpurl1[14:-1]
                 requested_object = Urls.objects.get(httpurl = search_name)
                 message = 'A short url for the entered url already exists'
             return render(request,'makeshort.html',{"message":message,"shortcode":shortcode, "httpurl":httpurl,"requested_object":requested_object})
