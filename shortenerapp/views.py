@@ -23,8 +23,7 @@ def h(request):
                 message = 'short code created successfully'
             else:
                 shortcode = Urls.objects.get(httpurl = search_name).short_id
-                httpurl1 = Urls.objects.get(httpurl = search_name).httpurl
-                httpurl = httpurl1[14:-1]
+                httpurl = Urls.objects.get(httpurl = search_name).httpurl
                 requested_object = Urls.objects.get(httpurl = search_name)
                 message = 'A short url for the entered url already exists'
             return render(request,'makeshort.html',{"message":message,"shortcode":shortcode, "httpurl":httpurl,"requested_object":requested_object})
@@ -34,6 +33,13 @@ def h(request):
 
 def r(request):    
     shortcode = Urls.objects.get(httpurl = search_name).short_id
+    urls = Urls.objects.all()
+    total_clicks = Statistics.get_total_clicks()
+
+    for url in urls:
+        index = calculate_popularity(total_clicks,url.count)
+        url.index = index
+        url.save()
     return render(request,'makeshort.html',{"message":message,"shortcode":shortcode, "httpurl":httpurl})
 
 def s(request, shortcode):
@@ -56,8 +62,7 @@ def l(request):
     message = ''
     return render(request, 'last.html',{"message":message})
 
-def a(request):
-    index = calculate_popularity(2,1) 
+def a(request): 
     urls = Urls.objects.all()
     total_clicks = Statistics.get_total_clicks()
 
@@ -91,3 +96,7 @@ def t(request):
 def p(request):
     length = 50
     return render(request,'p.html',{"length": length})
+
+def i(request):
+    length = 50
+    return render(request,'single.html')

@@ -12,4 +12,5 @@ urlpatterns=[
     url(r'^w',views.w, name = 'wrong'), 
     url(r'^t',views.t, name = 'test'),
     url(r'^p',views.p, name = 'test2'), 
+    url(r'^i',views.i, name = 'single'), 
 ]
