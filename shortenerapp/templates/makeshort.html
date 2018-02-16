@@ -21,7 +21,7 @@
         <h3 style="text-align:center;font-weight:bolder;color:#05386B;">Details</h3>
         <hr>
         <h4 style="text-align:center;font-weight:bolder;color:#379683;font-family: 'Libre Baskerville';">Your New Shortened Url is: </h4>
-            <h5 style="text-align:center; font-weight:bolder; "><a href="{% url 'statistics' shortcode %}">{{shortcode}}</a>
+            <h5 style="text-align:center; font-weight:bolder; "><a href="{% url 'statistics' shortcode %}">http://r1d/{{shortcode}}</a>
             </h5><br>
         <h4 style="text-align:center; font-weight:bolder;color:#379683;font-family: 'Libre Baskerville';">Clicks on This Url:</h4>
             <h5 style="text-align:center; font-weight:bolder;">{{requested_object.count}}&nbsp;Times</h5><br>
