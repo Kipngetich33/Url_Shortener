@@ -26,7 +26,8 @@ def h(request):
                 httpurl = Urls.objects.get(httpurl = search_name).httpurl
                 requested_object = Urls.objects.get(httpurl = search_name)
                 message = 'A short url for the entered url already exists'
-            return render(request,'makeshort.html',{"message":message,"shortcode":shortcode, "httpurl":httpurl,"requested_object":requested_object})
+                total_clicks = Statistics.get_total_clicks()
+            return render(request,'makeshort.html',{"message":message,"shortcode":shortcode, "httpurl":httpurl,"requested_object":requested_object,"total_clicks":total_clicks})
     else:
         form = UrlForm()
     return render(request,'home.html',{"form":form})
@@ -52,6 +53,13 @@ def s(request, shortcode):
             increase_total = Statistics.objects.get(name = 'statistics')
             increase_total.total_clicks += 1
             increase_total.save()
+
+            total_clicks1 = Statistics.get_total_clicks()
+            urls = Urls.objects.all()
+            for url in urls:
+                index = calculate_popularity(total_clicks1,url.count)
+                url.index = index
+                url.save()
             return redirect(requested_url.httpurl)
         else:
             return redirect(l)
