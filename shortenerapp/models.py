@@ -6,7 +6,7 @@ import random
 # Create your models here.
 class Urls(models.Model):
     short_id = models.SlugField(max_length=6,primary_key=True)
-    httpurl = models.URLField(max_length=200, null = True)
+    httpurl = models.URLField(null = True)
     pub_date = models.DateTimeField(auto_now=True)
     count = models.PositiveIntegerField(default=0)
     index = models.IntegerField(default=0,null = True)
@@ -92,7 +92,7 @@ class Statistics(models.Model):
     Class that defines the structure of the statistics objects
     '''
     name =  models.CharField(max_length = 30, default ='statistics')
-    total_clicks = models.PositiveIntegerField(default=0)
+    total_clicks = models.PositiveIntegerField(default=1)
 
     @classmethod
     def get_total_clicks(cls):

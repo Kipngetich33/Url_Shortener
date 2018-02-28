@@ -21,6 +21,7 @@ def h(request):
                 httpurl = search_name 
                 requested_object = Urls.objects.get(httpurl = search_name)
                 message = 'short code created successfully'
+                total_clicks = Statistics.get_total_clicks()
             else:
                 shortcode = Urls.objects.get(httpurl = search_name).short_id
                 httpurl = Urls.objects.get(httpurl = search_name).httpurl
